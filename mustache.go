@@ -513,7 +513,9 @@ func renderElement(element interface{}, contextChain []interface{}, buf io.Write
             }
         }
     case *sectionElement:
-        renderSection(elem, contextChain, buf)
+        if len(contextChain) > 0 {
+            renderSection(elem, contextChain, buf)
+        }
     case *Template:
         elem.renderTemplate(contextChain, buf)
     }
